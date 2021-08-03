@@ -1,3 +1,6 @@
+<?php
+  use Core\Template;
+?>
 
 <link href="/static/assets/custom/navbar-top-fixed.css" rel="stylesheet">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -29,3 +32,25 @@
       </div>
     </div>
   </nav>
+
+  <?php 
+    foreach (Template::$messages as $message) {
+      echo'
+        <div class="container alert alert-'.$message["level"].' alert-dismissible fade show" role="alert">
+          <span>'.$message["message"].'</span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      ';
+    }
+
+    
+  ?>
+  <script>
+    var alertList = document.querySelectorAll('.alert');
+    alertList.forEach(function (alert) {
+      setTimeout(function(){
+        var el = new bootstrap.Alert(alert);
+        el.close();
+      },3000);
+    });
+  </script>

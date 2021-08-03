@@ -9,7 +9,7 @@ function Patient(){
     $patient = new Model("patient",
         array_merge(Mixins::$commons,Mixins::$user,[
             "date_naissance"=>"date",
-            "nom_jeune_fille_mere"=>"varchar(255)"
+            "nom_jeune_fille_mere"=>"varchar(255) unique"
         ])
     );
 

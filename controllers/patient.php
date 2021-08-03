@@ -8,22 +8,44 @@ use Core\Template;
 function patient_create()
 {   
 
-    Patient()->create($_POST);
-
-    $patients = Patient()->get([
-        "id"=>[
-            "selector"=>">=",
-            "value"=>0
+    $libre = count(Patient()->get([
+        "nom_jeune_fille_mere"=>[
+            "selector"=>"=",
+            "value"=>$_POST["nom_jeune_fille_mere"]
         ]
+    ]));
+
+    if (!$libre) {
+        Patient()->create($_POST);
+
+        $patients = Patient()->get([
+            "id"=>[
+                "selector"=>">=",
+                "value"=>0
+            ]
+        ]);
+
+        $id = $patients[count($patients)-1]["id"];
+
+        Dossier()->create([
+            "id_patient"=>$id
+        ]);
+        
+        Template::redirect('/patient');
+    }
+    else{
+        Template::load_message("Le Nom de jeune mere doit etre unique.","danger");
+    }
+    Template::render("./templates/patient/patient_liste.php",[
+        "active_page"=>"patient",
+        "patients"=>Patient()->get([
+            "id"=>[
+                "selector"=>">=",
+                "value"=>0
+            ]
+        ])
     ]);
-
-    $id = $patients[count($patients)-1]["id"];
-
-    Dossier()->create([
-        "id_patient"=>$id
-    ]);
-
-    Template::redirect('/patient');
+    
 }
 
 function patient_liste()
