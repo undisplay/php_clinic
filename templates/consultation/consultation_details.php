@@ -19,13 +19,13 @@
         <span><strong> Date: </strong><?php echo $consultation["date"];?></span>
       </div>
       <div class="row">
-        <div class="col-md-6 col-12 d-flex justify-content-md-between">
+        <div class="col-md-6 col-12 mb-1 d-flex justify-content-between">
           <span><strong class="h5 me-2">Medecin:</strong><?php echo $medecin["nom"].' '.$medecin["prenom"];?></span>
-          <a href="<?php echo'/medecin/'.$medecin['id'];?>" class="btn btn-primary">Voir</a>
+          <a href="<?php echo'/medecin/'.$medecin['id'];?>" class="btn btn-primary">Voir Medecin</a>
         </div>
-        <div class="col-md-6 col-12 d-flex justify-content-md-between">
+        <div class="col-md-6 col-12 mb-1 d-flex justify-content-between">
           <span ><strong class="h5 me-2">Patient:</strong><?php echo $patient["nom"].' '.$patient["prenom"];?></span>
-          <a href="<?php echo'/patient/'.$patient['id'];?>" class="btn btn-primary">Voir</a>
+          <a href="<?php echo'/patient/'.$patient['id'];?>" class="btn btn-primary">Voir Patient</a>
         </div>
       </div>
       <h5>Symptomes:</h5>
